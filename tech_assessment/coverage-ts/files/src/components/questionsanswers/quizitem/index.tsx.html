@@ -1,0 +1,133 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>index.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="..\..\..\..\..\assets\source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="..\..\..\..\..\assets\source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="..\..\..\..\..\index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src\components\questionsanswers\quizitem\index.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">210</td><td class="">210</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useContext } from &quot;react&quot;;
+import { Checkbox, FormControlLabel, FormGroup } from &quot;@mui/material&quot;;
+import cn from &quot;classnames&quot;;
+import CheckIcon from &quot;@mui/icons-material/Check&quot;;
+import SentimentVeryDissatisfiedIcon from &quot;@mui/icons-material/SentimentVeryDissatisfied&quot;;
+import SentimentSatisfiedAltIcon from &quot;@mui/icons-material/SentimentSatisfiedAlt&quot;;
+import DangerousIcon from &quot;@mui/icons-material/Dangerous&quot;;
+import { IQuizItem, IAnswer, EquizItemState, IQuizItemResult } from &quot;context/types&quot;;
+import { ResultsContext, LangContext } from &quot;context/usecontext&quot;;
+import styles from &quot;./styles.module.css&quot;;
+
+interface Props {
+  quizItem: IQuizItem;
+  questionIndex: number;
+}
+
+export const QuizItem = ({ quizItem, questionIndex }: Props): JSX.Element =&gt; {
+  const answersResults = useContext(ResultsContext);
+  const { language } = useContext(LangContext);
+  // const [quizItemState, setQuizItemState] = useState&lt;EquizItemState&gt;(EquizItemState.NEW);
+
+  let quizItemState = EquizItemState.NEW;
+  let userAnswerIndex: null | number = null;
+  const thisAnswerResult = (answersResults[language] as IQuizItemResult[])[questionIndex];
+  if (thisAnswerResult) {
+    // setQuizItemState(thisAnswerResult.result);
+    quizItemState = thisAnswerResult.result;
+    userAnswerIndex = thisAnswerResult.answer;
+  }
+
+  const onChange = (answerItem: IAnswer, index: number) =&gt; {
+    return () =&gt; {
+      if (quizItemState !== EquizItemState.NEW) return;
+      // if (answerItem.isCorrect) setQuizItemState(EquizItemState.RIGHT);
+      // else setQuizItemState(EquizItemState.WRONG);
+      const answerResult: IQuizItemResult = {
+        result: answerItem.isCorrect ? EquizItemState.RIGHT : EquizItemState.WRONG,
+        answer: index,
+      };
+      answersResults.change(language, questionIndex, answerResult);
+    };
+  };
+
+  let icon: JSX.Element | null = null;
+  if (quizItemState === EquizItemState.NEW) icon = null;
+  if (quizItemState === EquizItemState.WRONG) icon = &lt;DangerousIcon /&gt;;
+  if (quizItemState === EquizItemState.RIGHT) icon = &lt;CheckIcon /&gt;;
+  const itemStateIsNew = quizItemState === EquizItemState.NEW;
+
+  const titleClassName = cn({
+    [styles.titleDefault]: quizItemState === EquizItemState.NEW,
+    [styles.titleWrong]: quizItemState === EquizItemState.WRONG,
+    [styles.titleRight]: quizItemState === EquizItemState.RIGHT,
+  });
+
+  return (
+    &lt;div&gt;
+      &lt;h2 className={titleClassName}&gt;
+        &lt;&gt;
+          {icon} {quizItem.question}
+        &lt;/&gt;
+      &lt;/h2&gt;
+      &lt;code&gt;
+        &lt;pre&gt;{quizItem.explanation.join(&quot;\n&quot;)}&lt;/pre&gt;
+      &lt;/code&gt;
+      &lt;FormGroup&gt;
+        &lt;ul&gt;
+          {quizItem.answers.map((answer, index) =&gt; {
+            const sadFace =
+              quizItemState === EquizItemState.WRONG &amp;&amp; index === userAnswerIndex ? (
+                &lt;SentimentVeryDissatisfiedIcon /&gt;
+              ) : null;
+            const smileFace =
+              quizItemState === EquizItemState.RIGHT &amp;&amp; index === userAnswerIndex ? (
+                &lt;SentimentSatisfiedAltIcon /&gt;
+              ) : null;
+            return (
+              &lt;li
+                key={index + answer.text}
+                className={cn({ [styles.highlight]: itemStateIsNew })}
+                onClick={onChange(answer, index)}
+              &gt;
+                &lt;div className={styles.listItem}&gt;
+                  {sadFace}
+                  {smileFace}
+                  &lt;FormControlLabel
+                    control={
+                      &lt;Checkbox
+                        checked={(answer.isCorrect &amp;&amp; !itemStateIsNew) || false}
+                        disabled={!itemStateIsNew}
+                      /&gt;
+                    }
+                    label={answer.text}
+                    disabled={!itemStateIsNew}
+                  /&gt;
+                  &lt;br /&gt;
+                &lt;/div&gt;
+                &lt;code className={styles.answerDescription}&gt;
+                  {answer.description.split(&quot;\n&quot;).map((line) =&gt; (
+                    &lt;div&gt;{line}&lt;/div&gt;
+                  ))}
+                &lt;/code&gt;
+              &lt;/li&gt;
+            );
+          })}
+        &lt;/ul&gt;
+      &lt;/FormGroup&gt;
+      &lt;code&gt;
+        {quizItem.description.map((descrLine, index) =&gt; (
+          &lt;div key={index}&gt;{descrLine}&lt;/div&gt;
+        ))}
+      &lt;/code&gt;
+    &lt;/div&gt;
+  );
+};
+</textarea><pre id="annotations" style="display:none">[]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Fri, 04 Nov 2022 11:02:25 GMT</p>
+    </body>
+  </html>
+  
