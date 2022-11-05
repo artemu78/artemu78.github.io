@@ -11,7 +11,7 @@
 <link href="..\..\..\..\..\assets\source-file.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="..\..\..\..\..\index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src\components\questionsanswers\stepper\index.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">113</td><td class="">113</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useContext, useRef, useEffect } from &quot;react&quot;;
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="..\..\..\..\..\index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src\components\questionsanswers\stepper\index.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">122</td><td class="">122</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useContext, useRef, useEffect } from &quot;react&quot;;
 import Box from &quot;@mui/material/Box&quot;;
 import { useTheme } from &quot;@mui/material/styles&quot;;
 import MobileStepper from &quot;@mui/material/MobileStepper&quot;;
@@ -21,6 +21,7 @@ import KeyboardArrowRight from &quot;@mui/icons-material/KeyboardArrowRight&quot
 import { QuizItem } from &quot;./../quizitem&quot;;
 import { IQuizItem } from &quot;context/types&quot;;
 import { StepContext } from &quot;context/usecontext&quot;;
+import styles from &quot;./styles.module.css&quot;;
 
 interface StepsProps {
   questions: IQuizItem[] | undefined;
@@ -51,45 +52,51 @@ export default function Stepper({ questions, language }: StepsProps) {
 
   return (
     &lt;Box sx={{ flexGrow: 1 }}&gt;
-      &lt;Box sx={{ width: &quot;100%&quot; }}&gt;
-        &lt;QuizItem
-          key={activeStep + questions[thisLanguageActiveStep].question}
-          quizItem={questions[thisLanguageActiveStep]}
-          questionIndex={thisLanguageActiveStep}
-          nextButtonRef={nextButton?.current}
+      &lt;div className={styles.fixedQuizItem}&gt;
+        &lt;Box sx={{ width: &quot;100%&quot; }}&gt;
+          &lt;QuizItem
+            key={activeStep + questions[thisLanguageActiveStep].question}
+            quizItem={questions[thisLanguageActiveStep]}
+            questionIndex={thisLanguageActiveStep}
+            nextButtonRef={nextButton?.current}
+          /&gt;
+        &lt;/Box&gt;
+        &lt;MobileStepper
+          variant=&quot;text&quot;
+          steps={maxSteps}
+          position=&quot;static&quot;
+          activeStep={thisLanguageActiveStep}
+          sx={{
+            bgcolor: &quot;transparent&quot;,
+            border: &quot;1px solid lightgrey&quot;,
+          }}
+          nextButton={
+            &lt;Button
+              size=&quot;small&quot;
+              onClick={handleNext}
+              disabled={thisLanguageActiveStep === maxSteps - 1}
+              ref={nextButton}
+              onFocus={(e): void =&gt; {
+                e.target.classList.add(&quot;Mui-focusVisible&quot;);
+              }}
+            &gt;
+              Next
+              {theme.direction === &quot;rtl&quot; ? &lt;KeyboardArrowLeft /&gt; : &lt;KeyboardArrowRight /&gt;}
+            &lt;/Button&gt;
+          }
+          backButton={
+            &lt;Button size=&quot;small&quot; onClick={handleBack} disabled={thisLanguageActiveStep === 0}&gt;
+              {theme.direction === &quot;rtl&quot; ? &lt;KeyboardArrowRight /&gt; : &lt;KeyboardArrowLeft /&gt;}
+              Back
+            &lt;/Button&gt;
+          }
         /&gt;
-      &lt;/Box&gt;
-      &lt;MobileStepper
-        variant=&quot;text&quot;
-        steps={maxSteps}
-        position=&quot;static&quot;
-        activeStep={thisLanguageActiveStep}
-        nextButton={
-          &lt;Button
-            size=&quot;small&quot;
-            onClick={handleNext}
-            disabled={thisLanguageActiveStep === maxSteps - 1}
-            ref={nextButton}
-            onFocus={(e): void =&gt; {
-              e.target.classList.add(&quot;Mui-focusVisible&quot;);
-            }}
-          &gt;
-            Next
-            {theme.direction === &quot;rtl&quot; ? &lt;KeyboardArrowLeft /&gt; : &lt;KeyboardArrowRight /&gt;}
-          &lt;/Button&gt;
-        }
-        backButton={
-          &lt;Button size=&quot;small&quot; onClick={handleBack} disabled={thisLanguageActiveStep === 0}&gt;
-            {theme.direction === &quot;rtl&quot; ? &lt;KeyboardArrowRight /&gt; : &lt;KeyboardArrowLeft /&gt;}
-            Back
-          &lt;/Button&gt;
-        }
-      /&gt;
+      &lt;/div&gt;
     &lt;/Box&gt;
   );
 }
 </textarea><pre id="annotations" style="display:none">[]</pre></div>
-    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sat, 05 Nov 2022 19:29:22 GMT</p>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sat, 05 Nov 2022 22:54:16 GMT</p>
     </body>
   </html>
   
