@@ -11,14 +11,16 @@
 <link href="..\..\..\..\..\assets\source-file.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="..\..\..\..\..\index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src\components\questionsanswers\quizitem\index.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">215</td><td class="">215</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useContext } from &quot;react&quot;;
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="..\..\..\..\..\index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src\components\questionsanswers\quizitem\index.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">248</td><td class="">248</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useContext } from &quot;react&quot;;
 import { Checkbox, FormControlLabel, FormGroup } from &quot;@mui/material&quot;;
+import { Remarkable } from &quot;remarkable&quot;;
 import cn from &quot;classnames&quot;;
 import CheckIcon from &quot;@mui/icons-material/Check&quot;;
 import SentimentVeryDissatisfiedIcon from &quot;@mui/icons-material/SentimentVeryDissatisfied&quot;;
 import SentimentSatisfiedAltIcon from &quot;@mui/icons-material/SentimentSatisfiedAlt&quot;;
 import DangerousIcon from &quot;@mui/icons-material/Dangerous&quot;;
 import { IQuizItem, IAnswer, EquizItemState, IQuizItemResult } from &quot;context/types&quot;;
+import { files } from &quot;tools/const&quot;;
 import { ResultsContext, LangContext } from &quot;context/usecontext&quot;;
 import styles from &quot;./styles.module.css&quot;;
 
@@ -31,7 +33,7 @@ interface Props {
 export const QuizItem = ({ quizItem, questionIndex, nextButtonRef }: Props): JSX.Element =&gt; {
   const answersResults = useContext(ResultsContext);
   const { language } = useContext(LangContext);
-
+  var md = new Remarkable();
   let quizItemState = EquizItemState.NEW;
   let userAnswerIndex: null | number = null;
   const thisAnswerResult = (answersResults[language] as IQuizItemResult[])[questionIndex];
@@ -39,6 +41,11 @@ export const QuizItem = ({ quizItem, questionIndex, nextButtonRef }: Props): JSX
     quizItemState = thisAnswerResult.result;
     userAnswerIndex = thisAnswerResult.answer;
   }
+  const mdFileUrl = files[language].url;
+  const basePath = mdFileUrl
+    .split(&quot;/&quot;)
+    .slice(0, mdFileUrl.split(&quot;/&quot;).length - 1)
+    .join(&quot;/&quot;);
 
   const onChange = (answerItem: IAnswer, index: number) =&gt; {
     return () =&gt; {
@@ -63,6 +70,13 @@ export const QuizItem = ({ quizItem, questionIndex, nextButtonRef }: Props): JSX
     [styles.titleRight]: quizItemState === EquizItemState.RIGHT,
   });
 
+  const srcRegex = /src=([&#x27;&quot;])(.*)([&#x27;&quot;])/g;
+  const explanation = md.render(quizItem.explanation).replace(srcRegex, `src=$1${basePath}/$2$3`);
+  const description = md.render(quizItem.description).replace(srcRegex, `src=$1${basePath}/$2$3`);
+
+  console.log(quizItem.explanation);
+  console.log(explanation);
+
   return (
     &lt;div&gt;
       &lt;h2 className={titleClassName}&gt;
@@ -70,9 +84,9 @@ export const QuizItem = ({ quizItem, questionIndex, nextButtonRef }: Props): JSX
           {icon} {quizItem.question}
         &lt;/&gt;
       &lt;/h2&gt;
-      &lt;code&gt;
-        &lt;pre&gt;{quizItem.explanation.join(&quot;\n&quot;)}&lt;/pre&gt;
-      &lt;/code&gt;
+      &lt;pre&gt;
+        &lt;code dangerouslySetInnerHTML={{ __html: explanation }} /&gt;
+      &lt;/pre&gt;
       &lt;FormGroup&gt;
         &lt;ul&gt;
           {quizItem.answers.map((answer, index) =&gt; {
@@ -84,6 +98,9 @@ export const QuizItem = ({ quizItem, questionIndex, nextButtonRef }: Props): JSX
               quizItemState === EquizItemState.RIGHT &amp;&amp; index === userAnswerIndex ? (
                 &lt;SentimentSatisfiedAltIcon /&gt;
               ) : null;
+            const answerDescription = md
+              .render(answer.description)
+              .replace(srcRegex, `src=$1${basePath}/$2$3`);
             return (
               &lt;li
                 key={index + answer.text}
@@ -105,26 +122,25 @@ export const QuizItem = ({ quizItem, questionIndex, nextButtonRef }: Props): JSX
                   /&gt;
                   &lt;br /&gt;
                 &lt;/div&gt;
-                &lt;code className={styles.answerDescription}&gt;
-                  {answer.description.split(&quot;\n&quot;).map((line, index) =&gt; (
-                    &lt;div key={index + line}&gt;{line}&lt;/div&gt;
-                  ))}
-                &lt;/code&gt;
+                &lt;pre&gt;
+                  &lt;code
+                    className={styles.answerDescription}
+                    dangerouslySetInnerHTML={{ __html: answerDescription }}
+                  /&gt;
+                &lt;/pre&gt;
               &lt;/li&gt;
             );
           })}
         &lt;/ul&gt;
       &lt;/FormGroup&gt;
-      &lt;code&gt;
-        {quizItem.description.map((descrLine, index) =&gt; (
-          &lt;div key={index}&gt;{descrLine}&lt;/div&gt;
-        ))}
-      &lt;/code&gt;
+      &lt;pre&gt;
+        &lt;code dangerouslySetInnerHTML={{ __html: description }} /&gt;
+      &lt;/pre&gt;
     &lt;/div&gt;
   );
 };
 </textarea><pre id="annotations" style="display:none">[]</pre></div>
-    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sat, 05 Nov 2022 13:24:11 GMT</p>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sat, 05 Nov 2022 19:29:22 GMT</p>
     </body>
   </html>
   
