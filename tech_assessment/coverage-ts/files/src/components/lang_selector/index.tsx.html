@@ -7,22 +7,21 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
-<script src="..\..\..\..\assets\source-file.js" type="text/javascript" charset="utf-8"></script>
-<link href="..\..\..\..\assets\source-file.css" type="text/css" rel="stylesheet">
+<script src="../../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="..\..\..\..\index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src\components\lang_selector\index.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">161</td><td class="">161</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useContext, useMemo } from &quot;react&quot;;
-import FormControl from &quot;@mui/material/FormControl&quot;;
-import InputLabel from &quot;@mui/material/InputLabel&quot;;
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/lang_selector/index.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">172</td><td class="">172</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useContext, useMemo } from &quot;react&quot;;
 import MenuItem from &quot;@mui/material/MenuItem&quot;;
-import Select, { SelectChangeEvent } from &quot;@mui/material/Select&quot;;
+import TextField from &quot;@mui/material/TextField&quot;;
+import Autocomplete from &quot;@mui/material/Autocomplete&quot;;
+
 import { setCookie } from &quot;tools&quot;;
-import { files } from &quot;tools/const&quot;;
+import { quizMetaData, IQuizMetadataItem, IQuizCode } from &quot;tools/const&quot;;
 import { LangContext, QuestionsContext, ResultsContext } from &quot;context/usecontext&quot;;
 import styles from &quot;./styles.module.css&quot;;
-import { IQuizItemResult, EquizItemState, Langs } from &quot;context/types&quot;;
+import { IQuizItemResult, EquizItemState } from &quot;context/types&quot;;
 
-// import SkipNextIcon from &quot;@mui/icons-material/SkipNext&quot;;
 import CheckIcon from &quot;@mui/icons-material/Check&quot;;
 import DangerousIcon from &quot;@mui/icons-material/Dangerous&quot;;
 
@@ -39,26 +38,23 @@ const calcResult = (results: IQuizItemResult[]): ICalcResult =&gt; {
   return { right, wrong, skipped };
 };
 
-const LangSelector = () =&gt; {
+const IQuizCodeelector = () =&gt; {
   const { language, change } = useContext(LangContext);
   const { questions } = useContext(QuestionsContext);
   const answersResults = useContext(ResultsContext);
-
-  const setLanguage = (changeEvent: SelectChangeEvent) =&gt; {
-    const langCode: Langs = changeEvent?.target?.value as Langs;
-    setCookie(&quot;prog_lang&quot;, langCode);
-    langCode !== language &amp;&amp; change(langCode);
-  };
 
   const calculatedResults = useMemo(
     () =&gt; calcResult(answersResults[language] as IQuizItemResult[]),
     [language, answersResults]
   );
 
-  const menuItems = [];
+  const flattenedQuizMetaData: IQuizMetadataItem[] = [];
 
-  for (let code in files) {
-    const name = files[code as keyof typeof files].name;
+  const menuItems: JSX.Element[] = [];
+  for (let code in quizMetaData) {
+    const quizDefItem = quizMetaData[code as keyof typeof quizMetaData];
+    const name = quizDefItem.name;
+    flattenedQuizMetaData.push(quizDefItem);
     menuItems.push(
       &lt;MenuItem value={code} key={code}&gt;
         {name || &quot;no name&quot;}
@@ -66,20 +62,24 @@ const LangSelector = () =&gt; {
     );
   }
 
+  const setLanguage = (changeEvent: React.SyntheticEvent, value: IQuizMetadataItem | null) =&gt; {
+    const langCode = (value?.code || &quot;&quot;) as IQuizCode;
+    setCookie(&quot;prog_lang&quot;, langCode);
+    langCode !== language &amp;&amp; change(langCode);
+  };
+
   return (
     &lt;div className={styles.container}&gt;
-      &lt;FormControl sx={{ minWidth: 120, width: 300 }}&gt;
-        &lt;InputLabel id=&quot;demo-simple-select-label&quot;&gt;Choose assessment&lt;/InputLabel&gt;
-        &lt;Select
-          labelId=&quot;demo-simple-select-label&quot;
-          id=&quot;demo-simple-select&quot;
-          label=&quot;Choose assessment language&quot;
-          onChange={setLanguage}
-          value={language || undefined}
-        &gt;
-          {menuItems}
-        &lt;/Select&gt;
-      &lt;/FormControl&gt;
+      &lt;Autocomplete
+        disablePortal
+        id=&quot;combo-box-demo&quot;
+        options={flattenedQuizMetaData}
+        sx={{ width: 300 }}
+        renderInput={(params) =&gt; &lt;TextField {...params} label=&quot;Choose assessment language&quot; /&gt;}
+        getOptionLabel={(option) =&gt; option.name}
+        onChange={setLanguage}
+        value={quizMetaData[language]}
+      /&gt;
       &lt;div className={styles.answers}&gt;
         &lt;div&gt;answers&lt;/div&gt;
         &lt;div className={styles.results}&gt;
@@ -102,9 +102,9 @@ const LangSelector = () =&gt; {
   );
 };
 
-export default LangSelector;
+export default IQuizCodeelector;
 </textarea><pre id="annotations" style="display:none">[]</pre></div>
-    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sat, 05 Nov 2022 22:54:16 GMT</p>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 06 Nov 2022 09:38:17 GMT</p>
     </body>
   </html>
   
