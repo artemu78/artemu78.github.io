@@ -1,8 +1,58 @@
 {
   "fileCounts": {},
-  "anys": [],
-  "percentage": 100,
-  "total": 1795,
-  "covered": 1795,
-  "uncovered": 0
+  "anys": [
+    {
+      "file": "src/components/Header/__tests__/index.test.tsx",
+      "line": 7,
+      "character": 17,
+      "text": "userEvent",
+      "kind": 1
+    },
+    {
+      "file": "src/components/Header/__tests__/index.test.tsx",
+      "line": 48,
+      "character": 10,
+      "text": "userEvent",
+      "kind": 1
+    },
+    {
+      "file": "src/components/Header/__tests__/index.test.tsx",
+      "line": 48,
+      "character": 20,
+      "text": "click",
+      "kind": 1
+    },
+    {
+      "file": "src/components/Header/__tests__/index.test.tsx",
+      "line": 57,
+      "character": 10,
+      "text": "userEvent",
+      "kind": 1
+    },
+    {
+      "file": "src/components/Header/__tests__/index.test.tsx",
+      "line": 57,
+      "character": 20,
+      "text": "click",
+      "kind": 1
+    },
+    {
+      "file": "src/components/Header/__tests__/index.test.tsx",
+      "line": 72,
+      "character": 10,
+      "text": "userEvent",
+      "kind": 1
+    },
+    {
+      "file": "src/components/Header/__tests__/index.test.tsx",
+      "line": 72,
+      "character": 20,
+      "text": "click",
+      "kind": 1
+    }
+  ],
+  "percentage": 99.64841788046208,
+  "total": 1991,
+  "covered": 1984,
+  "uncovered": 7
 }

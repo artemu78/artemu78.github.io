@@ -11,34 +11,37 @@
 <link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Header/index.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">118</td><td class="">118</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useState } from &quot;react&quot;;
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Header/index.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">128</td><td class="">128</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useState } from &quot;react&quot;;
 import IconButton from &quot;@mui/material/IconButton&quot;;
 import Dialog from &quot;@mui/material/Dialog&quot;;
+import DialogActions from &quot;@mui/material/DialogActions&quot;;
+import DialogContent from &quot;@mui/material/DialogContent&quot;;
 import MenuIcon from &quot;@mui/icons-material/Menu&quot;;
 import Menu from &quot;@mui/material/Menu&quot;;
 import MenuItem from &quot;@mui/material/MenuItem&quot;;
-
+import Button from &quot;@mui/material/Button&quot;;
 import styles from &quot;./styles.module.css&quot;;
 
 const Header = (): JSX.Element =&gt; {
-  const [isModalOpen, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState&lt;null | HTMLElement&gt;(null);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [anchorEl, setMenuAnchorEl] = useState&lt;null | HTMLElement&gt;(null);
+
   const handleMenuClick = (event: React.MouseEvent&lt;HTMLButtonElement&gt;) =&gt; {
-    setAnchorEl(event.currentTarget);
+    setMenuAnchorEl(event.currentTarget);
   };
 
   const open = Boolean(anchorEl);
 
-  const handleClick = () =&gt; {
-    setOpen(false);
+  const handleDialogClose = () =&gt; {
+    setModalOpen(false);
   };
-  const handleClose = () =&gt; {
-    setAnchorEl(null);
+  const handleMenuClose = () =&gt; {
+    setMenuAnchorEl(null);
   };
 
   const aboutItemClick = () =&gt; {
-    setOpen(true);
-    setAnchorEl(null);
+    setModalOpen(true);
+    setMenuAnchorEl(null);
   };
 
   return (
@@ -59,13 +62,20 @@ const Header = (): JSX.Element =&gt; {
           aria-haspopup=&quot;true&quot;
           aria-expanded={open ? &quot;true&quot; : undefined}
           onClick={handleMenuClick}
+          data-testid=&quot;header_menuButton&quot;
         &gt;
           &lt;MenuIcon /&gt;
         &lt;/IconButton&gt;
         &lt;h1&gt;Technical Assessment&lt;/h1&gt;
       &lt;/div&gt;
-      &lt;Dialog onClose={handleClick} open={isModalOpen}&gt;
-        &lt;div className={styles.info}&gt;
+      &lt;Dialog
+        onClose={() =&gt; {
+          handleDialogClose();
+        }}
+        open={isModalOpen}
+        data-testid=&quot;header_aboutDialog&quot;
+      &gt;
+        &lt;DialogContent&gt;
           This is open source technical questions assessment.
           &lt;br /&gt;
           &lt;br /&gt;
@@ -92,18 +102,25 @@ const Header = (): JSX.Element =&gt; {
           &gt;
             contribute
           &lt;/a&gt;
-        &lt;/div&gt;
+        &lt;/DialogContent&gt;
+        &lt;DialogActions&gt;
+          &lt;Button onClick={handleDialogClose} data-testid=&quot;header-closeButton&quot;&gt;
+            Close
+          &lt;/Button&gt;
+        &lt;/DialogActions&gt;
       &lt;/Dialog&gt;
       &lt;Menu
         id=&quot;basic-menu&quot;
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+        onClose={handleMenuClose}
         MenuListProps={{
           &quot;aria-labelledby&quot;: &quot;basic-button&quot;,
         }}
       &gt;
-        &lt;MenuItem onClick={aboutItemClick}&gt;About&lt;/MenuItem&gt;
+        &lt;MenuItem onClick={aboutItemClick} data-testid=&quot;header_aboutItem&quot;&gt;
+          About
+        &lt;/MenuItem&gt;
       &lt;/Menu&gt;
     &lt;/header&gt;
   );
@@ -111,7 +128,7 @@ const Header = (): JSX.Element =&gt; {
 
 export default Header;
 </textarea><pre id="annotations" style="display:none">[]</pre></div>
-    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 06 Nov 2022 23:37:25 GMT</p>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Mon, 21 Nov 2022 16:57:42 GMT</p>
     </body>
   </html>
   
