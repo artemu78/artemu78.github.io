@@ -1,6 +1,6 @@
 1:HL["https://artemu78.github.io/rsc/_next/static/css/8024356ca8c5a89e.css","style",{"crossOrigin":""}]
-0:["_jP8J8fSUZfXf3hAL-i-8",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"https://artemu78.github.io/rsc/_next/static/css/8024356ca8c5a89e.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
-4:I[4033,["269","static/chunks/269-61b642fa26343813.js","728","static/chunks/728-ab35807ec3e031b0.js","185","static/chunks/app/layout-3737c4f790c95a23.js"],""]
+0:["XqHKUxo7sFIWfkA9CM9gG",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"https://artemu78.github.io/rsc/_next/static/css/8024356ca8c5a89e.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
+4:I[4033,["269","static/chunks/269-61b642fa26343813.js","728","static/chunks/728-ab35807ec3e031b0.js","185","static/chunks/app/layout-6b615bccdd147504.js"],""]
 5:I[6954,[],""]
 6:I[7264,[],""]
 8:I[24,["269","static/chunks/269-61b642fa26343813.js","931","static/chunks/app/page-8f7b3ecb49811a97.js"],""]
