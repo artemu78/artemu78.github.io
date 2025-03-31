@@ -1,27 +1,411 @@
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>My repo, hello world</title>
-<script type="text/javascript">
-function displayInfo() {
-const info = `window.innerWidth ${window.innerWidth}<br>
-document.documentElement.clientWidth ${document?.documentElement?.clientWidth}<br>`;
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artem Reva's Projects</title>
+    <style>
+      :root {
+        --text-color: #2c3e50;
+        --link-color: #3498db;
+        --hover-color: #2980b9;
+        --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        --card-background: #ffffff;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
 
-document.getElementById('screenInfo').innerHTML = info;
-}
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: var(--background);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
 
-</script>
-</head>
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
 
-<body>
-<center>
-<h1 onclick="displayInfo()">Hello world!</h1>
-</center>
-<ul>
-<li><a href="/dropdown">Dropdown example + useLayoutEffect example</a> / <a href="https://github.com/artemu78/webdev_test_ya_ar" target="_blank">repository</a></li>
-<li><a href="/tech_assessment">Technical assessment quiz</a> / <a href="https://github.com/artemu78/tech_assessment" target="_blank">repository</a> / <a href="/tech_assessment/coverage-ts">TS coverage report</a> / <a href="/tech_assessment/coverage">test coverage report</a></li>
-</ul>
-<div id="screenInfo" />
-</body>
+      h1 {
+        text-align: center;
+        color: var(--text-color);
+        margin-bottom: 40px;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
 
+      h1:hover {
+        color: var(--hover-color);
+      }
+
+      .project-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .project-item {
+        background: var(--card-background);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s;
+        outline: none;
+      }
+
+      .project-item:focus {
+        outline: 2px solid var(--link-color);
+        outline-offset: 2px;
+      }
+
+      .project-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .project-title {
+        color: var(--text-color);
+        margin: 0 0 10px 0;
+      }
+
+      .project-description {
+        color: #666;
+        margin: 10px 0;
+      }
+
+      .links {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      a {
+        color: var(--link-color);
+        text-decoration: none;
+        transition: color 0.3s;
+        outline: none;
+      }
+
+      a:hover,
+      a:focus {
+        color: var(--hover-color);
+        outline: 2px solid var(--link-color);
+        outline-offset: 2px;
+      }
+
+      #screenInfo {
+        margin-top: 20px;
+        padding: 15px;
+        background: var(--card-background);
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-section {
+        background: var(--card-background);
+        padding: 60px 20px;
+        margin: 40px 0;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(52, 152, 219, 0.1) 0%,
+          rgba(52, 152, 219, 0.05) 100%
+        );
+        z-index: 0;
+      }
+
+      .about-section .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .about-section h2 {
+        color: var(--text-color);
+        margin-bottom: 30px;
+        font-size: 2.5rem;
+        line-height: 1.2;
+        letter-spacing: -0.5px;
+      }
+
+      .about-section p {
+        max-width: 800px;
+        margin: 0 auto;
+        color: var(--text-color);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        letter-spacing: 0.2px;
+      }
+
+      .about-section p br {
+        display: block;
+        margin: 20px 0;
+      }
+
+      /* High contrast mode */
+      @media (prefers-contrast: high) {
+        :root {
+          --text-color: #000000;
+          --link-color: #0000ff;
+          --hover-color: #0000cc;
+          --background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+          --card-background: #ffffff;
+        }
+
+        .about-section {
+          background: #ffffff;
+          border: 2px solid #000000;
+        }
+
+        .about-section h2 {
+          color: #000000;
+        }
+
+        .about-section p {
+          color: #000000;
+        }
+      }
+
+      /* Small screens */
+      @media (max-width: 768px) {
+        .about-section {
+          padding: 40px 15px;
+        }
+
+        .about-section h2 {
+          font-size: 2rem;
+        }
+
+        .about-section p {
+          font-size: 1rem;
+        }
+      }
+
+      /* Screen reader only text */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+    <script type="text/javascript">
+      function displayInfo() {
+        const info = `window.innerWidth: ${window.innerWidth}<br>
+                         document.documentElement.clientWidth: ${document?.documentElement?.clientWidth}<br>`;
+        document.getElementById("screenInfo").innerHTML = info;
+      }
+
+      // Add keyboard navigation support
+      document.addEventListener("DOMContentLoaded", function () {
+        const projectItems = document.querySelectorAll(".project-item");
+        let currentIndex = 0;
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Tab") {
+            e.preventDefault();
+            projectItems[currentIndex].blur();
+            currentIndex = (currentIndex + 1) % projectItems.length;
+            projectItems[currentIndex].focus();
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <header role="banner">
+      <div class="container">
+        <h1 onclick="displayInfo()" role="button" tabindex="0">About me</h1>
+      </div>
+    </header>
+    <div class="about-section" role="region" aria-label="About Me">
+      <div class="container">
+        <p>
+          I am a frontend tech lead with extensive experience in React,
+          TypeScript, and JavaScript, specializing in building scalable and
+          maintainable web applications.
+          <br /><br />
+          I thrive in leading development teams, conducting thorough code
+          reviews, and optimizing workflows to ensure high-quality software
+          delivery. Beyond my technical expertise, I am passionate about
+          teaching and knowledge-sharing—I create web development courses, host
+          webinars, and run a YouTube channel where I simplify complex IT
+          concepts.
+          <br /><br />
+          I also have hands-on experience with AWS, leveraging API Gateway,
+          Lambda, and DynamoDB to develop efficient cloud-based solutions. As an
+          active community builder, I organize AI-focused meetups and manage a
+          growing WhatsApp group on AI in business. I am always eager to learn,
+          mentor, and contribute to innovative projects that push the boundaries
+          of technology.
+          <br />
+          <br />
+          You can connect with me on
+          <a
+            href="https://www.linkedin.com/in/artem-reva/?locale=en_US"
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn</a
+          >.
+        </p>
+      </div>
+    </div>
+    <header role="banner">
+      <div class="container">
+        <h1 onclick="displayInfo()" role="button" tabindex="0">
+          My pet projects
+        </h1>
+      </div>
+    </header>
+    <main role="main">
+      <div class="container">
+        <section aria-label="Project List" role="region">
+          <div class="project-list">
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="/dropdown"
+                  aria-label="Dropdown Example + useLayoutEffect - View project"
+                  >Dropdown Example + useLayoutEffect</a
+                >
+              </div>
+              <div class="project-description">
+                A React component demonstrating a dropdown menu implementation
+                with React's useLayoutEffect hook for optimal performance.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/webdev_test_ya_ar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for Dropdown Example + useLayoutEffect"
+                  >View Repository</a
+                >
+              </div>
+            </article>
+
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="/tech_assessment"
+                  aria-label="Technical Assessment Quiz - View project"
+                  >Technical Assessment Quiz</a
+                >
+              </div>
+              <div class="project-description">
+                A comprehensive technical assessment tool featuring a quiz
+                interface with TypeScript support and detailed test coverage
+                reports.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/tech_assessment"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for Technical Assessment Quiz"
+                  >View Repository</a
+                >
+              </div>
+            </article>
+
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="/infinite-llm-dialogue/"
+                  aria-label="Infinite LLM Dialogue - View project"
+                  >Infinite LLM Dialogue</a
+                >
+              </div>
+              <div class="project-description">
+                An interactive web application that allows users to engage in an
+                infinite dialogue with a large language model (LLM) in
+                real-time.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/infinite-llm-dialogue"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for Infinite LLM Dialogue"
+                  >View Repository</a
+                >
+              </div>
+            </article>
+
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="https://chromewebstore.google.com/detail/openai-api-explorer/cancnnlepmbfaegpklfklajlfglbdcan"
+                  aria-label="OpenAI API Explorer - View project"
+                  >OpenAI API Explorer</a
+                >
+              </div>
+              <div class="project-description">
+                Chrome extension that allows users to explore and test the
+                OpenAI API.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/openai-api-explorer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for OpenAI API Explorer"
+                  >View Repository</a
+                >
+              </div>
+            </article>
+
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="https://chromewebstore.google.com/detail/todoist-completed-tasks/paapllajhpnafedjcijfpapmlnioiggc"
+                  aria-label="Todoist Completed Tasks - View project"
+                  >Todoist Completed Tasks</a
+                >
+              </div>
+              <div class="project-description">
+                Chrome extension that allows users to view completed tasks from
+                Todoist.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/todoist-completed-tasks"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for Todoist Completed Tasks"
+                  >View Repository</a
+                >
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <div id="screenInfo" role="status" aria-live="polite"></div>
+      </div>
+    </main>
+
+    <footer role="contentinfo">
+      <div class="container">
+        <p class="sr-only">End of projects list</p>
+      </div>
+    </footer>
+  </body>
 </html>
