@@ -50,7 +50,7 @@
     .project-item {
       background: var(--card-background);
       border-radius: 10px;
-      padding: 20px;
+      padding: 20px 20px 20px 40px;
       margin-bottom: 20px;
       box-shadow: var(--shadow);
       transition: transform 0.3s;
@@ -68,7 +68,8 @@
 
     .project-title {
       color: var(--text-color);
-      margin: 0 0 10px 0;
+      margin: 0 0 10px -20px;
+      font-size: larger;
     }
 
     .project-description {
@@ -294,6 +295,7 @@
         { repo: "openai-api-explorer", elementId: "commit-dates-4" },
         { repo: "todoist-chrome-extension", elementId: "commit-dates-5" },
         { repo: "Creato", elementId: "commit-dates-6" },
+        { repo: "TeamSkillBooster", elementId: "commit-dates-7" },
       ];
 
       const projectDatesPromises = [];
@@ -455,10 +457,24 @@
             </div>
             <div id="commit-dates-6" class="commit-dates" aria-live="polite"><div class="spinner" /></div>
           </article>
+
+          <article class="project-item" tabindex="0">
+            <div>
+              <a href="https://team-skill-booster.netlify.app/" aria-label="Team Skill Booster - View project">Team
+                Skill Booster</a>
+            </div>
+            <div class="project-description">
+              "Vibe Coding" example - text-based version of LInkedin Course "Teamwork Essentials: Stand Out as a Valuable Team Member". Replit, Firebase Studio, GitHub Copilot for coding. Claude for HTML/tailwind stylization. Gemini and ChatGPT for media.
+            </div>
+            <div id="commit-dates-7" class="commit-dates" aria-live="polite"><div class="spinner" /></div>
+            <div class="links">
+              <a href="https://github.com/artemu78/TeamSkillBooster" target="_blank" rel="noopener noreferrer"
+                aria-label="View repository for Creato">View Repository</a>
+            </div>
+          </article>
+
         </div>
       </section>
-
-      <div id="screenInfo" role="status" aria-live="polite"></div>
     </div>
   </main>
 
