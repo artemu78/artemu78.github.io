@@ -1,488 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artem Reva's Projects</title>
-  <style>
-    :root {
-      --text-color: #2c3e50;
-      --link-color: #3498db;
-      --hover-color: #2980b9;
-      --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      --card-background: #ffffff;
-      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: var(--background);
-      color: var(--text-color);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    h1 {
-      text-align: center;
-      color: var(--text-color);
-      margin-bottom: 40px;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    h1:hover {
-      color: var(--hover-color);
-    }
-
-    .project-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .project-item {
-      background: var(--card-background);
-      border-radius: 10px;
-      padding: 20px 20px 20px 40px;
-      margin-bottom: 20px;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s;
-      outline: none;
-    }
-
-    .project-item:focus {
-      outline: 2px solid var(--link-color);
-      outline-offset: 2px;
-    }
-
-    .project-item:hover {
-      transform: translateY(-5px);
-    }
-
-    .project-title {
-      color: var(--text-color);
-      margin: 0 0 10px -20px;
-      font-size: larger;
-    }
-
-    .project-description {
-      color: #666;
-      margin: 10px 0;
-    }
-
-    .links {
-      display: flex;
-      gap: 15px;
-      margin-top: 10px;
-    }
-
-    a {
-      color: var(--link-color);
-      text-decoration: none;
-      transition: color 0.3s;
-      outline: none;
-    }
-
-    a:hover,
-    a:focus {
-      color: var(--hover-color);
-      outline: 2px solid var(--link-color);
-      outline-offset: 2px;
-    }
-
-    #screenInfo {
-      margin-top: 20px;
-      padding: 15px;
-      background: var(--card-background);
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .about-section {
-      background: var(--card-background);
-      padding: 0 20px;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-section::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg,
-          rgba(52, 152, 219, 0.1) 0%,
-          rgba(52, 152, 219, 0.05) 100%);
-      z-index: 0;
-    }
-
-    .about-section .container {
-      position: relative;
-      z-index: 1;
-    }
-
-    .about-section h2 {
-      color: var(--text-color);
-      margin-bottom: 30px;
-      font-size: 2.5rem;
-      line-height: 1.2;
-      letter-spacing: -0.5px;
-    }
-
-    .about-section p {
-      max-width: 800px;
-      margin: 0 auto;
-      color: var(--text-color);
-      font-size: 1.1rem;
-      line-height: 1.8;
-      letter-spacing: 0.2px;
-    }
-
-    .about-section p br {
-      display: block;
-      margin: 20px 0;
-    }
-
-    /* High contrast mode */
-    @media (prefers-contrast: high) {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artem Reva's Projects</title>
+    <style>
       :root {
-        --text-color: #000000;
-        --link-color: #0000ff;
-        --hover-color: #0000cc;
-        --background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+        --text-color: #2c3e50;
+        --link-color: #3498db;
+        --hover-color: #2980b9;
+        --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         --card-background: #ffffff;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: var(--background);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--text-color);
+        margin-bottom: 40px;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      h1:hover {
+        color: var(--hover-color);
+      }
+
+      .project-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .project-item {
+        background: var(--card-background);
+        border-radius: 10px;
+        padding: 20px 20px 20px 40px;
+        margin-bottom: 20px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s;
+        outline: none;
+      }
+
+      .project-item:focus {
+        outline: 2px solid var(--link-color);
+        outline-offset: 2px;
+      }
+
+      .project-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .project-title {
+        color: var(--text-color);
+        margin: 0 0 10px -20px;
+        font-size: larger;
+      }
+
+      .project-description {
+        color: #666;
+        margin: 10px 0;
+      }
+
+      .links {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      a {
+        color: var(--link-color);
+        text-decoration: none;
+        transition: color 0.3s;
+        outline: none;
+      }
+
+      a:hover,
+      a:focus {
+        color: var(--hover-color);
+        outline: 2px solid var(--link-color);
+        outline-offset: 2px;
+      }
+
+      #screenInfo {
+        margin-top: 20px;
+        padding: 15px;
+        background: var(--card-background);
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
 
       .about-section {
-        background: #ffffff;
-        border: 2px solid #000000;
+        background: var(--card-background);
+        padding: 0 20px;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
       }
 
-      .about-section h2 {
-        color: #000000;
-      }
-
-      .about-section p {
-        color: #000000;
-      }
-    }
-
-    /* Small screens */
-    @media (max-width: 768px) {
-      .about-section {
-        padding: 40px 15px;
-      }
-
-      .about-section h2 {
-        font-size: 2rem;
-      }
-
-      .about-section p {
-        font-size: 1rem;
-      }
-    }
-
-    /* Screen reader only text */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    .commit-dates {
-      margin-top: 10px;
-      font-size: 0.9rem;
-      color: #666;
-    }
-
-    .commit-dates .commit-date {
-      font-weight: bold;
-    }
-
-    .spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #3498db;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      animation: spin 1s linear infinite;
-    }
-  </style>
-  <script type="text/javascript">
-    function displayInfo() {
-      const info = `window.innerWidth: ${window.innerWidth}<br>
-                         document.documentElement.clientWidth: ${document?.documentElement?.clientWidth}<br>`;
-      document.getElementById("screenInfo").innerHTML = info;
-    }
-
-    // Add keyboard navigation support
-    document.addEventListener("DOMContentLoaded", function () {
-      const projectItems = document.querySelectorAll(".project-item");
-      let currentIndex = 0;
-
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Tab") {
-          e.preventDefault();
-          projectItems[currentIndex].blur();
-          currentIndex = (currentIndex + 1) % projectItems.length;
-          projectItems[currentIndex].focus();
-        }
-      });
-    });
-
-    async function fetchCommitDates(repo, page = 1, datesObject = {}) {
-      try {
-        const response = await fetch(
-          `https://api.github.com/repos/artemu78/${repo}/commits?per_page=100&page=${page}`,
-          {
-            headers: {
-              Accept: "application/vnd.github.v3+json",
-              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
-            },
-          }
+      .about-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(52, 152, 219, 0.1) 0%,
+          rgba(52, 152, 219, 0.05) 100%
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch commit data");
-        }
-        const commits = await response.json();
-        if (commits.length === 0) {
-          return datesObject;
-        }
-        else {
-          const firstCommitDate = new Date(commits[commits.length - 1].commit.author.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-          const lastCommitDate = new Date(commits[0].commit.author.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-          const dates = {
-            firstCommitDate: firstCommitDate || datesObject.firstCommitDate,
-            lastCommitDate: (page === 1) ? lastCommitDate : datesObject.lastCommitDate,
-          };
-          return fetchCommitDates(repo, page + 1, dates);
-        }
-      } catch (error) {
-        console.error(error);
-        document.getElementById(elementId).innerHTML = "Commit dates unavailable";
+        z-index: 0;
       }
-    }
 
-    function renderCommitDates(elementId, datesObject) {
-      document.getElementById(elementId).innerHTML = `
+      .about-section .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .about-section h2 {
+        color: var(--text-color);
+        margin-bottom: 30px;
+        font-size: 2.5rem;
+        line-height: 1.2;
+        letter-spacing: -0.5px;
+      }
+
+      .about-section p {
+        max-width: 800px;
+        margin: 0 auto;
+        color: var(--text-color);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        letter-spacing: 0.2px;
+      }
+
+      .about-section p br {
+        display: block;
+        margin: 20px 0;
+      }
+
+      /* High contrast mode */
+      @media (prefers-contrast: high) {
+        :root {
+          --text-color: #000000;
+          --link-color: #0000ff;
+          --hover-color: #0000cc;
+          --background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+          --card-background: #ffffff;
+        }
+
+        .about-section {
+          background: #ffffff;
+          border: 2px solid #000000;
+        }
+
+        .about-section h2 {
+          color: #000000;
+        }
+
+        .about-section p {
+          color: #000000;
+        }
+      }
+
+      /* Small screens */
+      @media (max-width: 768px) {
+        .about-section {
+          padding: 40px 15px;
+        }
+
+        .about-section h2 {
+          font-size: 2rem;
+        }
+
+        .about-section p {
+          font-size: 1rem;
+        }
+      }
+
+      /* Screen reader only text */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .commit-dates {
+        margin-top: 10px;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .commit-dates .commit-date {
+        font-weight: bold;
+      }
+
+      .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+      }
+    </style>
+    <script type="text/javascript">
+      function displayInfo() {
+        const info = `window.innerWidth: ${window.innerWidth}<br>
+                         document.documentElement.clientWidth: ${document?.documentElement?.clientWidth}<br>`;
+        document.getElementById("screenInfo").innerHTML = info;
+      }
+
+      // Add keyboard navigation support
+      document.addEventListener("DOMContentLoaded", function () {
+        const projectItems = document.querySelectorAll(".project-item");
+        let currentIndex = 0;
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Tab") {
+            e.preventDefault();
+            projectItems[currentIndex].blur();
+            currentIndex = (currentIndex + 1) % projectItems.length;
+            projectItems[currentIndex].focus();
+          }
+        });
+      });
+
+      async function fetchCommitDates(repo, page = 1, datesObject = {}) {
+        try {
+          const response = await fetch(
+            `https://api.github.com/repos/artemu78/${repo}/commits?per_page=100&page=${page}`,
+            {
+              headers: {
+                Accept: "application/vnd.github.v3+json",
+                "User-Agent":
+                  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+              },
+            }
+          );
+          if (!response.ok) {
+            throw new Error("Failed to fetch commit data");
+          }
+          const commits = await response.json();
+          if (commits.length === 0) {
+            return datesObject;
+          } else {
+            const firstCommitDate = new Date(
+              commits[commits.length - 1].commit.author.date
+            ).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            });
+            const lastCommitDate = new Date(
+              commits[0].commit.author.date
+            ).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            });
+            const dates = {
+              firstCommitDate: firstCommitDate || datesObject.firstCommitDate,
+              lastCommitDate:
+                page === 1 ? lastCommitDate : datesObject.lastCommitDate,
+            };
+            return fetchCommitDates(repo, page + 1, dates);
+          }
+        } catch (error) {
+          console.error(error);
+          document.getElementById(elementId).innerHTML =
+            "Commit dates unavailable";
+        }
+      }
+
+      function renderCommitDates(elementId, datesObject) {
+        document.getElementById(elementId).innerHTML = `
             <span class="commit-date">First Commit:</span> ${datesObject.firstCommitDate}
             <span class="commit-date">Last Commit:</span> ${datesObject.lastCommitDate}
           `;
-    }
+      }
 
-    document.addEventListener("DOMContentLoaded", async function () {
-      const projects = [
-        { repo: "webdev_test_ya_ar", elementId: "commit-dates-1" },
-        { repo: "tech_assessment", elementId: "commit-dates-2" },
-        { repo: "infinite-llm-dialogue", elementId: "commit-dates-3" },
-        { repo: "openai-api-explorer", elementId: "commit-dates-4" },
-        { repo: "todoist-chrome-extension", elementId: "commit-dates-5" },
-        { repo: "Creato", elementId: "commit-dates-6" },
-        { repo: "TeamSkillBooster", elementId: "commit-dates-7" },
-      ];
+      document.addEventListener("DOMContentLoaded", async function () {
+        const projects = [
+          { repo: "webdev_test_ya_ar", elementId: "commit-dates-1" },
+          { repo: "tech_assessment", elementId: "commit-dates-2" },
+          { repo: "infinite-llm-dialogue", elementId: "commit-dates-3" },
+          { repo: "openai-api-explorer", elementId: "commit-dates-4" },
+          { repo: "todoist-chrome-extension", elementId: "commit-dates-5" },
+          { repo: "Creato", elementId: "commit-dates-6" },
+          { repo: "TeamSkillBooster", elementId: "commit-dates-7" },
+        ];
 
-      const projectDatesPromises = [];
-      projects.forEach((project, index) => {
-        projectDatesPromises[index] = fetchCommitDates(project.repo);
-      });
-      Promise.all(projectDatesPromises)
-        .then((datesArray) => {
-          datesArray.forEach((datesObject, index) => {
-            renderCommitDates(projects[index].elementId, datesObject);
-          });
-        })
-        .catch((error) => {
-          console.error("Error fetching commit dates:", error);
+        const projectDatesPromises = [];
+        projects.forEach((project, index) => {
+          projectDatesPromises[index] = fetchCommitDates(project.repo);
         });
-    });
-  </script>
-</head>
+        Promise.all(projectDatesPromises)
+          .then((datesArray) => {
+            datesArray.forEach((datesObject, index) => {
+              renderCommitDates(projects[index].elementId, datesObject);
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching commit dates:", error);
+          });
+      });
+    </script>
+  </head>
 
-<body>
-  <header role="banner">
-    <div class="container">
-      <h1 onclick="displayInfo()" role="button" tabindex="0">About me</h1>
+  <body>
+    <header role="banner">
+      <div class="container">
+        <h1 onclick="displayInfo()" role="button" tabindex="0">About me</h1>
+      </div>
+    </header>
+    <div class="about-section" role="region" aria-label="About Me">
+      <div class="container">
+        <p>
+          I am a frontend tech lead with extensive experience in React,
+          TypeScript, and JavaScript, specializing in building scalable and
+          maintainable web applications.
+          <br /><br />
+          I thrive in leading development teams, conducting thorough code
+          reviews, and optimizing workflows to ensure high-quality software
+          delivery. Beyond my technical expertise, I am passionate about
+          teaching and knowledge-sharing. I create web development courses, host
+          webinars, and run a
+          <a
+            href="https://www.youtube.com/@CodeMentorHub-y6b"
+            target="_blank"
+            rel="noopener noreferrer"
+            >YouTube channel</a
+          >
+          where I simplify complex IT concepts. <br /><br />
+          I also have hands-on experience with AWS, leveraging API Gateway,
+          Lambda, and DynamoDB to develop efficient cloud-based solutions. As an
+          active community builder, I organize AI-focused meetups and manage a
+          growing WhatsApp group on AI in Antalya, Turkiye. I am always eager to
+          learn, mentor, and contribute to innovative projects that push the
+          boundaries of technology.
+          <br />
+          <br />
+          You can connect with me on
+          <a
+            href="https://www.linkedin.com/in/artem-reva/?locale=en_US"
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn</a
+          >.
+        </p>
+      </div>
     </div>
-  </header>
-  <div class="about-section" role="region" aria-label="About Me">
-    <div class="container">
-      <p>
-        I am a frontend tech lead with extensive experience in React,
-        TypeScript, and JavaScript, specializing in building scalable and
-        maintainable web applications.
-        <br /><br />
-        I thrive in leading development teams, conducting thorough code
-        reviews, and optimizing workflows to ensure high-quality software
-        delivery. Beyond my technical expertise, I am passionate about
-        teaching and knowledge-sharing. I create web development courses, host
-        webinars, and run a
-        <a href="https://www.youtube.com/@CodeMentorHub-y6b" target="_blank" rel="noopener noreferrer">YouTube
-          channel</a>
-        where I simplify complex IT concepts. <br /><br />
-        I also have hands-on experience with AWS, leveraging API Gateway,
-        Lambda, and DynamoDB to develop efficient cloud-based solutions. As an
-        active community builder, I organize AI-focused meetups and manage a
-        growing WhatsApp group on AI in Antalya, Turkiye. I am always eager to
-        learn, mentor, and contribute to innovative projects that push the
-        boundaries of technology.
-        <br />
-        <br />
-        You can connect with me on
-        <a href="https://www.linkedin.com/in/artem-reva/?locale=en_US" target="_blank"
-          rel="noopener noreferrer">LinkedIn</a>.
-      </p>
-    </div>
-  </div>
-  <header role="banner">
-    <div class="container">
-      <h1 onclick="displayInfo()" role="button" tabindex="0">
-        My pet projects
-      </h1>
-    </div>
-  </header>
-  <main role="main">
-    <div class="container">
-      <section aria-label="Project List" role="region">
-        <div class="project-list">
-          <article class="project-item" tabindex="0">
-            <div class="project-title">
-              <a href="/dropdown" aria-label="Dropdown Example + useLayoutEffect - View project">Dropdown Example +
-                useLayoutEffect</a>
-            </div>
-            <div class="project-description">
-              A React component demonstrating a dropdown menu implementation
-              with React's useLayoutEffect hook for optimal performance.
-            </div>
-            <div class="links">
-              <a href="https://github.com/artemu78/webdev_test_ya_ar" target="_blank" rel="noopener noreferrer"
-                aria-label="View repository for Dropdown Example + useLayoutEffect">View Repository</a>
-            </div>
-            <div id="commit-dates-1" class="commit-dates" aria-live="polite"><div class="spinner" /></div>
-          </article>
+    <header role="banner">
+      <div class="container">
+        <h1 onclick="displayInfo()" role="button" tabindex="0">
+          My pet projects
+        </h1>
+      </div>
+    </header>
+    <main role="main">
+      <div class="container">
+        <section aria-label="Project List" role="region">
+          <div class="project-list">
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="/dropdown"
+                  aria-label="Dropdown Example + useLayoutEffect - View project"
+                  >Dropdown Example + useLayoutEffect</a
+                >
+              </div>
+              <div class="project-description">
+                A React component demonstrating a dropdown menu implementation
+                with React's useLayoutEffect hook for optimal performance.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/webdev_test_ya_ar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for Dropdown Example + useLayoutEffect"
+                  >View Repository</a
+                >
+              </div>
+              <div id="commit-dates-1" class="commit-dates" aria-live="polite">
+                <div class="spinner" />
+              </div>
+            </article>
 
-          <article class="project-item" tabindex="0">
-            <div class="project-title">
-              <a href="/tech_assessment" aria-label="Technical Assessment Quiz - View project">Technical Assessment
-                Quiz</a>
-            </div>
-            <div class="project-description">
-              A comprehensive technical assessment tool featuring a quiz
-              interface with TypeScript support and detailed test coverage
-              reports.
-            </div>
-            <div class="links">
-              <a href="https://github.com/artemu78/tech_assessment" target="_blank" rel="noopener noreferrer"
-                aria-label="View repository for Technical Assessment Quiz">View Repository</a>
-            </div>
-            <div id="commit-dates-2" class="commit-dates" aria-live="polite"><div class="spinner" /></div>
-          </article>
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="/tech_assessment"
+                  aria-label="Technical Assessment Quiz - View project"
+                  >Technical Assessment Quiz</a
+                >
+              </div>
+              <div class="project-description">
+                A comprehensive technical assessment tool featuring a quiz
+                interface with TypeScript support and detailed test coverage
+                reports.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/tech_assessment"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for Technical Assessment Quiz"
+                  >View Repository</a
+                >
+              </div>
+              <div id="commit-dates-2" class="commit-dates" aria-live="polite">
+                <div class="spinner" />
+              </div>
+            </article>
 
-          <article class="project-item" tabindex="0">
-            <div class="project-title">
-              <a href="/infinite-llm-dialogue/" aria-label="Infinite LLM Dialogue - View project">Infinite LLM
-                Dialogue</a>
-            </div>
-            <div class="project-description">
-              An interactive web application that allows users to engage in an
-              infinite dialogue with a large language model (LLM) in
-              real-time.
-            </div>
-            <div class="links">
-              <a href="https://github.com/artemu78/infinite-llm-dialogue" target="_blank" rel="noopener noreferrer"
-                aria-label="View repository for Infinite LLM Dialogue">View Repository</a>
-            </div>
-            <div id="commit-dates-3" class="commit-dates" aria-live="polite"><div class="spinner" /></div>
-          </article>
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="/infinite-llm-dialogue/"
+                  aria-label="Infinite LLM Dialogue - View project"
+                  >Infinite LLM Dialogue</a
+                >
+              </div>
+              <div class="project-description">
+                An interactive web application that allows users to engage in an
+                infinite dialogue with a large language model (LLM) in
+                real-time.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/infinite-llm-dialogue"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for Infinite LLM Dialogue"
+                  >View Repository</a
+                >
+              </div>
+              <div id="commit-dates-3" class="commit-dates" aria-live="polite">
+                <div class="spinner" />
+              </div>
+            </article>
 
-          <article class="project-item" tabindex="0">
-            <div class="project-title">
-              <a href="https://chromewebstore.google.com/detail/openai-api-explorer/cancnnlepmbfaegpklfklajlfglbdcan"
-                aria-label="OpenAI API Explorer - View project">OpenAI API Explorer</a>
-            </div>
-            <div class="project-description">
-              Chrome extension that allows users to explore and test the
-              OpenAI API.
-            </div>
-            <div class="links">
-              <a href="https://github.com/artemu78/openai-api-explorer" target="_blank" rel="noopener noreferrer"
-                aria-label="View repository for OpenAI API Explorer">View Repository</a>
-            </div>
-            <div id="commit-dates-4" class="commit-dates" aria-live="polite"><div class="spinner" /></div>
-          </article>
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="https://chromewebstore.google.com/detail/openai-api-explorer/cancnnlepmbfaegpklfklajlfglbdcan"
+                  aria-label="OpenAI API Explorer - View project"
+                  >OpenAI API Explorer</a
+                >
+              </div>
+              <div class="project-description">
+                Chrome extension that allows users to explore and test the
+                OpenAI API.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/openai-api-explorer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for OpenAI API Explorer"
+                  >View Repository</a
+                >
+              </div>
+              <div id="commit-dates-4" class="commit-dates" aria-live="polite">
+                <div class="spinner" />
+              </div>
+            </article>
 
-          <article class="project-item" tabindex="0">
-            <div class="project-title">
-              <a href="https://chromewebstore.google.com/detail/todoist-completed-tasks/paapllajhpnafedjcijfpapmlnioiggc"
-                aria-label="Todoist Completed Tasks - View project">Todoist Completed Tasks</a>
-            </div>
-            <div class="project-description">
-              Chrome extension that allows users to view completed tasks from
-              Todoist.
-            </div>
-            <div class="links">
-              <a href="https://github.com/artemu78/todoist-chrome-extension" target="_blank" rel="noopener noreferrer"
-                aria-label="View repository for Todoist Completed Tasks">View Repository</a>
-            </div>
-            <div id="commit-dates-5" class="commit-dates" aria-live="polite"><div class="spinner" /></div>
-          </article>
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="https://chromewebstore.google.com/detail/todoist-completed-tasks/paapllajhpnafedjcijfpapmlnioiggc"
+                  aria-label="Todoist Completed Tasks - View project"
+                  >Todoist Completed Tasks</a
+                >
+              </div>
+              <div class="project-description">
+                Chrome extension that allows users to view completed tasks from
+                Todoist.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/todoist-chrome-extension"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for Todoist Completed Tasks"
+                  >View Repository</a
+                >
+              </div>
+              <div id="commit-dates-5" class="commit-dates" aria-live="polite">
+                <div class="spinner" />
+              </div>
+            </article>
 
-          <article class="project-item" tabindex="0">
-            <div class="project-title">
-              Creato. Generate lip-synced character using ElevenLabs and Hedra.
-            </div>
-            <div class="project-description">
-              Electron based app, which use ElevenLabs or OpenAI text-to-speech models to narrate text. And Hedra API to
-              animate character.
-            </div>
-            <div class="links">
-              <a href="https://github.com/artemu78/Creato" target="_blank" rel="noopener noreferrer"
-                aria-label="View repository for Creato">View Repository</a>
-            </div>
-            <div id="commit-dates-6" class="commit-dates" aria-live="polite"><div class="spinner" /></div>
-          </article>
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                Creato. Generate lip-synced character using ElevenLabs and
+                Hedra.
+              </div>
+              <div class="project-description">
+                Electron based app, which use ElevenLabs or OpenAI
+                text-to-speech models to narrate text. And Hedra API to animate
+                character.
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/Creato"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for Creato"
+                  >View Repository</a
+                >
+              </div>
+              <div id="commit-dates-6" class="commit-dates" aria-live="polite">
+                <div class="spinner" />
+              </div>
+            </article>
 
-          <article class="project-item" tabindex="0">
-            <div>
-              <a href="https://team-skill-booster.netlify.app/" aria-label="Team Skill Booster - View project">Team
-                Skill Booster</a>
-            </div>
-            <div class="project-description">
-              "Vibe Coding" example - text-based version of LInkedin Course "Teamwork Essentials: Stand Out as a Valuable Team Member". Replit, Firebase Studio, GitHub Copilot for coding. Claude for HTML/tailwind stylization. Gemini and ChatGPT for media.
-            </div>
-            <div id="commit-dates-7" class="commit-dates" aria-live="polite"><div class="spinner" /></div>
-            <div class="links">
-              <a href="https://github.com/artemu78/TeamSkillBooster" target="_blank" rel="noopener noreferrer"
-                aria-label="View repository for Creato">View Repository</a>
-            </div>
-          </article>
+            <article class="project-item" tabindex="0">
+              <div class="project-title">
+                <a
+                  href="https://team-skill-booster.netlify.app/"
+                  aria-label="Team Skill Booster - View project"
+                  >Team Skill Booster</a
+                >
+              </div>
+              <div class="project-description">
+                "Vibe Coding" example - text-based version of LInkedin Course
+                "Teamwork Essentials: Stand Out as a Valuable Team Member".
+                Replit, Firebase Studio, GitHub Copilot for coding. Claude for
+                HTML/tailwind stylization. Gemini and ChatGPT for media.
+              </div>
+              <div id="commit-dates-7" class="commit-dates" aria-live="polite">
+                <div class="spinner" />
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/TeamSkillBooster"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository for Creato"
+                  >View Repository</a
+                >
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
 
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <footer role="contentinfo">
-    <div class="container">
-      <p class="sr-only">End of projects list</p>
-    </div>
-  </footer>
-</body>
-
+    <footer role="contentinfo">
+      <div class="container">
+        <p class="sr-only">End of projects list</p>
+      </div>
+    </footer>
+  </body>
 </html>
