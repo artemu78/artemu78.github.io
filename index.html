@@ -311,6 +311,8 @@
           { repo: "todoist-chrome-extension", elementId: "commit-dates-5" },
           { repo: "Creato", elementId: "commit-dates-6" },
           { repo: "TeamSkillBooster", elementId: "commit-dates-7" },
+          { repo: "wordspark-linguify-learn", elementId: "commit-dates-8" },
+          { repo: "prompt-play-pictures", elementId: "commit-dates-9" },
         ];
 
         const projectDatesPromises = [];
@@ -375,7 +377,7 @@
     </div>
     <header role="banner">
       <div class="container">
-        <h1 onclick="displayInfo()" role="button" tabindex="0">
+        <h1 onclick="displayInfo()" role="button" tabindex="1">
           My pet projects
         </h1>
       </div>
@@ -384,7 +386,8 @@
       <div class="container">
         <section aria-label="Project List" role="region">
           <div class="project-list">
-            <article class="project-item" tabindex="0">
+            <!-- Dropdown menu -->
+            <article class="project-item" tabindex="2">
               <div class="project-title">
                 <a
                   href="/dropdown"
@@ -410,7 +413,8 @@
               </div>
             </article>
 
-            <article class="project-item" tabindex="0">
+            <!-- Technical Assessment Quiz -->
+            <article class="project-item" tabindex="3">
               <div class="project-title">
                 <a
                   href="/tech_assessment"
@@ -437,7 +441,8 @@
               </div>
             </article>
 
-            <article class="project-item" tabindex="0">
+            <!-- Infinite LLM Dialogue -->
+            <article class="project-item" tabindex="4">
               <div class="project-title">
                 <a
                   href="/infinite-llm-dialogue/"
@@ -464,7 +469,8 @@
               </div>
             </article>
 
-            <article class="project-item" tabindex="0">
+            <!-- OpenAI API Explorer -->
+            <article class="project-item" tabindex="5">
               <div class="project-title">
                 <a
                   href="https://chromewebstore.google.com/detail/openai-api-explorer/cancnnlepmbfaegpklfklajlfglbdcan"
@@ -490,7 +496,8 @@
               </div>
             </article>
 
-            <article class="project-item" tabindex="0">
+            <!-- Todoist Completed Tasks -->
+            <article class="project-item" tabindex="6">
               <div class="project-title">
                 <a
                   href="https://chromewebstore.google.com/detail/todoist-completed-tasks/paapllajhpnafedjcijfpapmlnioiggc"
@@ -516,7 +523,8 @@
               </div>
             </article>
 
-            <article class="project-item" tabindex="0">
+            <!-- Creato -->
+            <article class="project-item" tabindex="7">
               <div class="project-title">
                 Creato. Generate lip-synced character using ElevenLabs and
                 Hedra.
@@ -540,6 +548,7 @@
               </div>
             </article>
 
+            <!-- Team Skill Booster -->
             <article class="project-item" tabindex="0">
               <div class="project-title">
                 <a
@@ -549,7 +558,7 @@
                 >
               </div>
               <div class="project-description">
-                "Vibe Coding" example - text-based version of LInkedin Course
+                "Vibe Coding" example - text-based version of LinkedIn Course
                 "Teamwork Essentials: Stand Out as a Valuable Team Member".
                 Replit, Firebase Studio, GitHub Copilot for coding. Claude for
                 HTML/tailwind stylization. Gemini and ChatGPT for media.
@@ -562,7 +571,66 @@
                   href="https://github.com/artemu78/TeamSkillBooster"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="View repository for Creato"
+                  aria-label="View repository for Team Skill Booster"
+                  >View Repository</a
+                >
+              </div>
+            </article>
+
+            <article class="project-item" tabindex="9">
+              <div class="project-title">
+                <a
+                  href="https://veo3videogenerator.netlify.app/"
+                  target="_blank"
+                  aria-label="VEO3 Video Generator"
+                  >VEO3 videos generator</a
+                >
+              </div>
+              <div class="project-description">
+                "Vibe Coding" example - use
+                <a href="https://fal.ai/models/fal-ai/veo3" target="_blank"
+                  >FAL.ai</a
+                >
+                API to generate videos with VEO3 model (you need Fal.ai API key)
+              </div>
+              <div id="commit-dates-8" class="commit-dates" aria-live="polite">
+                <div class="spinner" />
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/prompt-play-pictures"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository"
+                  >View Repository</a
+                >
+              </div>
+            </article>
+
+            <article class="project-item" tabindex="9">
+              <div class="project-title">
+                <a
+                  href="https://wordspark-linguify-learn.lovable.app/"
+                  target="_blank"
+                  aria-label="VEO3 Video Generator"
+                  >Learn vocabulary with AI-powered lists</a
+                >
+              </div>
+              <div class="project-description">
+                "Vibe Coding" example - web app for learning foreign words.
+                Gemini API provide lists of words for new vocabularies.
+                ElevenLabs API provide words pronunciation. Backend logic is in
+                Supabase Edge functions. Database - Supabase SQL DB.
+              </div>
+              <div id="commit-dates-9" class="commit-dates" aria-live="polite">
+                <div class="spinner" />
+              </div>
+              <div class="links">
+                <a
+                  href="https://github.com/artemu78/wordspark-linguify-learn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View repository"
                   >View Repository</a
                 >
               </div>
